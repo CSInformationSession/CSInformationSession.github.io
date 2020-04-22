@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="googleDefault.css">
     <link rel="stylesheet" href="googleFonts.css">
     <link rel="stylesheet" href="googleFonts2.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
     <style>
 
@@ -5695,7 +5697,7 @@ body {
                                                         class="quantumWizTextinputPaperinputContentArea exportContentArea">
                                                         <div class="quantumWizTextinputPaperinputInputArea">
                                                             <!--- CUSTOM EDIT: Loss of google js broke the date picker too, so added an id to control it independently -->
-                                                            <input id="datePicker" type="date"
+                                                            <input id="datePicker2" type="date"
                                                                 class="quantumWizTextinputPaperinputInput exportInput"
                                                                 jsname="YPqjbf" autocomplete="off" tabindex="0" value=""
                                                                 data-initial-value="">
@@ -5978,19 +5980,33 @@ body {
         var yearElement = document.getElementById('yearField');
         var monthElement = document.getElementById('monthField');
         var dayElement = document.getElementById('dayField');
-        var dateElement = document.getElementById('datePicker');
+        var dateElement = document.getElementById('datePicker2');
         
         var dateString = dateElement.value;
         var info = dateString.split("-");
         
-        yearElement.value = info[0];
-        monthElement.value = info[1];
-        dayElement.value = info[2];
+        yearElement.value = info[2];
+        monthElement.value = info[0];
+        dayElement.value = info[1];
         console.log("DONE");
         console.log(dateString);
         document.forms['search-form'].submit()
     }
 </script>
+
+<script>
+    document.getElementById("datePicker2").flatpickr(
+      {
+        disable: [
+        function(date) {
+            return (date.getDay() == 0 || date.getDay() == 6
+            || (date.getMonth() >= 6 && date.getMonth() <= 7)
+            || (date < new Date()));
+        },
+        ],
+        dateFormat: "m-d-Y",      
+      });
+  </script>
 
 </body>
 
